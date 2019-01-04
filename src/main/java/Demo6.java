@@ -30,19 +30,29 @@
 		对应的操作：11小于15，11小于12，11大于8，于是11放到8后面，排序完成。
  	
  */
+import java.io.*;
+import java.util.*;
 
 public class Demo6 {
 	public static void main(String[] args) {
 
 		int[] a = { 12, 8, 2, 7, 15, 6, 4, 11 };
 		insertionSort(a);
-		for (int i : a)
-			System.out.print(i + " ");
+		List<Integer> s= getList(a);
+		for (int i = 0; i < s.size(); i++) {
+			if(i == s.size()-1){
+			System.out.print(s.get(i));
+			}else {
+			System.out.print(s.get(i)+",");
+			}
+		}
+		System.out.println(Arrays.toString(a));
 	}
 
-	public static void insertionSort(int[] a) {
+	public static int[] insertionSort(int[] a) {
+		int temp =0;
 		for (int i = 1; i < a.length; i++) { // 从第二个数开始，第一个数没意义比较
-			int temp = a[i]; // 拿出要比较的数
+			temp = a[i]; // 拿出要比较的数
 			int j = 0;
 			for (j = i - 1; j >= 0; j--) { // i位置之前是已经排好了的，从后往前比较
 				if (a[j] > temp) { // 一次比较i位置之前的数，如果比要比较的数小，则把j这个位置的数往后移
@@ -53,5 +63,13 @@ public class Demo6 {
 			}
 			a[j + 1] = temp;// 前面往后移只是依次赋值，最后要还要等一轮比较后，再把要比较的值放入合适的位置，不然会出现重复出现一样的值
 		}
+		return a;
+	}
+	public static List<Integer> getList(int[] arr){
+		List<Integer>list=new ArrayList<Integer>();
+		for(int i=0;i<arr.length;i++){
+			list.add(arr[i]);
+		}
+		return list;
 	}
 }
